@@ -41,13 +41,13 @@ export const GithubProvider = ({ children }) => {
 	const getUser = async (login) => {
 		setLoading()
 
-		const response = await fetch(`${GITHUB_URL}/search/users/${login}`, {
+		const response = await fetch(`${GITHUB_URL}/users/${login}`, {
 			headers: {
 				Authorization: `token: ${GITHUB_TOKEN}`,
 			},
 		})
 
-		if (response.status === 404) {
+		if (response.status !== 404) {
 			window.location = '/notfound'
 		} else {
 			const data = await response.json()
